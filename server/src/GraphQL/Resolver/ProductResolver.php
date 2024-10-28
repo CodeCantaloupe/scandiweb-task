@@ -3,18 +3,18 @@
 namespace App\GraphQL\Resolver;
 
 use App\Config\Database;
-use App\Models\Category;
+use App\Models\Product;
 use Exception;
 
-function CategoryResolver()
+function ProductsResolver()
 {
     try {
         $database = new Database();
         $db = $database->getConnection();
-        $category = new Category($db);
-        return $category->getAllCategories();
+        $product = new Product($db);
+        return $product->getAllProducts();
     } catch (Exception $e) {
-        error_log("Error in CategoryResolver: " . $e->getMessage());
+        error_log("Error in productsResolver: " . $e->getMessage());
         return null; 
     }
 }

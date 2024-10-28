@@ -1,23 +1,21 @@
 <?php
 // App/GraphQL/Type/CategoryType.php
 
-namespace App\GraphQL\Schema;
+namespace App\GraphQL\Type;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class AttributeType extends ObjectType
+class GalleryType extends ObjectType
 {
     public function __construct()
     {
         parent::__construct([
-            'name' => 'Attributes',
+            'name' => 'Gallery',
             'fields' => [
                 'id' => Type::nonNull(Type::int()),
                 'product_id' => Type::nonNull(Type::string()),
-                'items' => Type::nonNull(Type::listOf(new AttributeItemType())),
-                'name' => Type::nonNull(Type::string()),
-                'type' => Type::nonNull(Type::string()),
+                'image_url' => Type::nonNull(Type::string()),
             ],
         ]);
     }

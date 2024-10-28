@@ -3,18 +3,18 @@
 namespace App\GraphQL\Resolver;
 
 use App\Config\Database;
-use App\Models\Category;
+use App\Models\Gallery;
 use Exception;
 
-function CategoryResolver()
+function GalleryResolver($productId)
 {
     try {
         $database = new Database();
         $db = $database->getConnection();
-        $category = new Category($db);
-        return $category->getAllCategories();
+        $gallery = new Gallery($db);
+        return $gallery->getAllGalleriesById($productId);
     } catch (Exception $e) {
-        error_log("Error in CategoryResolver: " . $e->getMessage());
+        error_log("Error in GalleryResolver: " . $e->getMessage());
         return null; 
     }
 }

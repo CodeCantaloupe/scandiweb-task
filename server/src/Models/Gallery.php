@@ -4,19 +4,29 @@
 namespace App\Models;
 
 use PDO;
+use PDOException;
 
-class Gallery {
+class Gallery
+{
     private $conn;
     private $table = 'galleries';
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    public function getAllGalleries() {
-        $query = "SELECT * FROM " . $this->table;
+    public function getAllGalleriesById($productId)
+    {
+        $query = "SELECT * FROM " . $this->table . " WHERE product_id = :product_id"; // Use prepared statements
         $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':product_id', $productId); // Bind parameter
+        try {
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            error_log("Error in getAllGalleriesById: " . $e->getMessage());
+            return []; // or throw a custom exception
+        }
     }
 }

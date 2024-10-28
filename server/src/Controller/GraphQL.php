@@ -9,8 +9,9 @@ use GraphQL\Type\Schema;
 use GraphQL\Type\SchemaConfig;
 use RuntimeException;
 use Throwable;
-use App\GraphQL\Type\QueryType;
-use App\GraphQL\Type\MutationType;
+use App\GraphQL\Schema\QueryType;
+use App\GraphQL\Schema\MutationType;
+use GraphQL\Error\DebugFlag;
 
 class GraphQL {
     static public function handle() {
@@ -38,7 +39,7 @@ class GraphQL {
         
             $rootValue = ['prefix' => 'You said: '];
             $result = GraphQLBase::executeQuery($schema, $query, $rootValue, null, $variableValues);
-            $output = $result->toArray();
+            $output = $result->toArray(DebugFlag::INCLUDE_DEBUG_MESSAGE);
         } catch (Throwable $e) {
             $output = [
                 'error' => [

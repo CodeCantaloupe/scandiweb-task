@@ -3,18 +3,18 @@
 namespace App\GraphQL\Resolver;
 
 use App\Config\Database;
-use App\Models\Product;
+use App\Models\Price;
 use Exception;
 
-function ProductsResolver($productId)
+function PriceResolver($productId)
 {
     try {
         $database = new Database();
         $db = $database->getConnection();
-        $product = new Product($db);
-        return $product->getAllProducts();
+        $price = new Price($db);
+        return $price->getPricesById($productId);
     } catch (Exception $e) {
-        error_log("Error in productsResolver: " . $e->getMessage());
+        error_log("Error in PriceResolver: " . $e->getMessage());
         return null; 
     }
 }

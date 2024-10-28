@@ -1,11 +1,14 @@
 import { Component } from "react";
+import { ApolloSandbox } from "@apollo/sandbox/react";
 
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Hello, World!</h1>
-      </div>
+      <ApolloSandbox
+        style={{ width: "100vw", height: "100vh" }}
+        className="w-screen h-screen min-w-full min-h-full"
+        initialEndpoint="http://localhost:8000/graphql"
+      />
     );
   }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\GraphQL\Type;
+namespace App\GraphQL\Schema;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-use App\GraphQL\Schema\CategoryType;
-use App\GraphQL\Schema\ProductType;
+use App\GraphQL\Type\CategoryType;
+use App\GraphQL\Type\ProductType;
 
-require_once __DIR__ . '/../Resolver/ProductsResolver.php';
+require_once __DIR__ . '/../Resolver/ProductResolver.php';
 require_once __DIR__ . '/../Resolver/CategoryResolver.php';
 
 use function App\GraphQL\Resolver\CategoryResolver;
@@ -38,7 +38,7 @@ class QueryType extends ObjectType
                 'products' => [
                     'type' => Type::listOf(new ProductType()),
                     'resolve' => function () {
-                        return ProductsResolver("");
+                        return ProductsResolver();
                     },
                     'description' => 'Get all products',
                 ]
