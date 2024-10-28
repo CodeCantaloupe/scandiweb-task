@@ -15,6 +15,7 @@ class AttributeType extends ObjectType
             'fields' => [
                 'id' => Type::nonNull(Type::int()),
                 'product_id' => Type::nonNull(Type::string()),
+                'items' => Type::nonNull(Type::listOf(new AttributeItemType())),
                 'name' => Type::nonNull(Type::string()),
                 'type' => Type::nonNull(Type::string()),
             ],
